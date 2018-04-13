@@ -32,11 +32,16 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.vvv"/>
+    <context:component-scan base-package="com.vvv.controllers"/>
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"/>
+        <property name="prefix" value="/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/resource/css" location="resource/css"/>
+    <mvc:resources mapping="/resource/fonts" location="resource/fonts"/>
+    <mvc:resources mapping="/resource/js" location="resource/js"/>
 </beans>

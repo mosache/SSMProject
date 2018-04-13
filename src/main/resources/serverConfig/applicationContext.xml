@@ -15,9 +15,9 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--<property name="mapperLocations">-->
-            <!--<value>classpath:mappers/*.xml</value>-->
-        <!--</property>-->
+        <property name="mapperLocations">
+            <value>classpath:mappers/*.xml</value>
+        </property>
         <property name="typeAliasesPackage" value="com.vvv.models"/>
     </bean>
 
@@ -43,4 +43,9 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCiut"/>
     </aop:config>
 
+    <context:component-scan base-package="com.vvv">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <context:annotation-config/>
 </beans>
