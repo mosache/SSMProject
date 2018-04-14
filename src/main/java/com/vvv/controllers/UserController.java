@@ -25,7 +25,12 @@ public class UserController {
             return "login";
         }else {
             session.setAttribute("currentUser",currentUser);
-            return "redirect:views/main.jsp";
+            return "redirect:main";
         }
+    }
+
+    @RequestMapping("/main")
+    public String main(){
+        return "main";
     }
 }
