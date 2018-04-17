@@ -2,6 +2,7 @@ package com.vvv.base.shiro;
 
 import com.vvv.models.User;
 import com.vvv.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroDbRealm extends AuthorizingRealm{
 
+    private Logger logger = Logger.getLogger(ShiroDbRealm.class);
+
     @Autowired
     private UserService userService;
 
@@ -20,6 +23,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        logger.info("======用户授权认证======");
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute(SESSION_USER_KEY);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRole(user.getRole().trim());
@@ -28,6 +32,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        logger.info("======用户登陆认证======");
         User user = tokenToUser((UsernamePasswordToken) authenticationToken);
         User loginUser = userService.login(user);
         if (loginUser == null){

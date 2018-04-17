@@ -19,6 +19,7 @@
             <value>classpath:mappers/userMappers.xml</value>
         </property>
         <property name="typeAliasesPackage" value="com.vvv.models"/>
+        <property name="configLocation" value="WEB-INF/serverConfig/mybatis-config.xml"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -48,4 +49,10 @@
     </context:component-scan>
 
     <context:annotation-config/>
+
+    <!--fileUpLoad-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000"/>
+        <property name="maxInMemorySize" value="1000000"/>
+    </bean>
 </beans>
